@@ -1,5 +1,16 @@
 ﻿Q3. What happens to the bounding boxes with update + fullRefit?
 
+Calling only fullRefit keeps the tree correct, but boxes grow and
+overlap as circles move, making pixel tracing slower over time.
+
 Q4. What happens with reset (rebuild every frame) instead?
 
+Using reset every frame rebuilds the tree around the circles
+current positions, keeping boxes small with minimal overlap.
+Although rebuilding costs (O(nlogn)), it is inexpensive with
+only 100 circles
+
 Q5. Why are some circles drawn with their sides cut off?
+Circles near window edges get clipped because their centers
+can be at the screen boundaries while their radii extend beyond
+them. This is not caused by the BVH.
